@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="349.0" prefWidth="574.0" style="-fx-background-color: darkblue;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.table_cars.CarsTableController">
+<AnchorPane prefHeight="349.0" prefWidth="574.0" style="-fx-background-color: darkblue;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.cars_table.CarsTableController">
    <children>
       <AnchorPane layoutY="57.0" prefHeight="292.0" prefWidth="448.0" style="-fx-background-color: white;">
          <children>

@@ -2,7 +2,6 @@ package main;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.ParallelCamera;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -15,7 +14,7 @@ import java.io.IOException;
 
 public class InputPassController {
 
-    private String truePass = "admin";
+    private String truePass = "";
 
     @FXML
     private Button inputButton;
@@ -31,7 +30,7 @@ public class InputPassController {
                 stage.close();
 
                 FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("/main/table_cars/cars_table.fxml"));
+                loader.setLocation(getClass().getResource("/main/cars_table/cars_table.fxml"));
 
                 try {
                     loader.load();

@@ -1,6 +1,8 @@
 package main;
 
-public class Car {
+import java.io.Serializable;
+
+public class Car implements Serializable {
     private String brand;
     private String number;
     private String pass;
