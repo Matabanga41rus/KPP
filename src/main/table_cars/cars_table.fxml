@@ -7,23 +7,24 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane prefHeight="302.0" prefWidth="448.0" style="-fx-background-color: darkblue;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.table_cars.CarsTableController">
+<AnchorPane prefHeight="349.0" prefWidth="574.0" style="-fx-background-color: darkblue;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.table_cars.CarsTableController">
    <children>
       <AnchorPane layoutY="57.0" prefHeight="292.0" prefWidth="448.0" style="-fx-background-color: white;">
          <children>
-            <TableView fx:id="carsTable" prefHeight="200.0" prefWidth="448.0">
+            <TableView fx:id="tableCars" prefHeight="200.0" prefWidth="573.0">
               <columns>
                 <TableColumn fx:id="brand" prefWidth="133.0" text="Car brand" />
-                <TableColumn fx:id="number" prefWidth="147.0" text="Car number" />
-                  <TableColumn fx:id="pass" prefWidth="166.0" text="Pass number" />
+                <TableColumn fx:id="number" prefWidth="102.0" text="Car number" />
+                  <TableColumn fx:id="pass" prefWidth="153.0" text="Pass number" />
+                  <TableColumn fx:id="date" prefWidth="106.0" text="Date" />
+                  <TableColumn fx:id="time" prefWidth="78.0" text="Time" />
               </columns>
             </TableView>
-            <Button fx:id="addRecord" layoutX="97.0" layoutY="227.0" mnemonicParsing="false" text="add record" />
-            <Button fx:id="deleteRecord" layoutX="285.0" layoutY="227.0" mnemonicParsing="false" text="delete record" />
+            <Button fx:id="addRecord" layoutX="129.0" layoutY="227.0" mnemonicParsing="false" text="Добавить запись" />
+            <Button fx:id="deleteRecord" layoutX="364.0" layoutY="227.0" mnemonicParsing="false" text="Удалить запись" />
          </children>
       </AnchorPane>
-      <Text fill="#f2efef" layoutX="31.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Контрольно пропускной пункт" textAlignment="CENTER" wrappingWidth="385.13671875">
+      <Text fill="#f2efef" layoutX="94.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Контрольнопропускной пункт" textAlignment="CENTER" wrappingWidth="385.13671875">
          <font>
             <Font name="Kartika" size="24.0" />
          </font>

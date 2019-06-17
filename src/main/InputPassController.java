@@ -31,7 +31,7 @@ public class InputPassController {
                 stage.close();
 
                 FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(getClass().getResource("/main/table/table.fxml"));
+                loader.setLocation(getClass().getResource("/main/table_cars/cars_table.fxml"));
 
                 try {
                     loader.load();

@@ -4,11 +4,15 @@ public class Car {
     private String brand;
     private String number;
     private String pass;
+    private String date;
+    private String time;
 
-    public Car(String brand, String number, String pass) {
+    public Car(String brand, String number, String pass, String date, String time) {
         this.brand = brand;
         this.number = number;
         this.pass = pass;
+        this.date = date;
+        this.time = time;
     }
 
     public String getBrand() {
@@ -23,6 +27,14 @@ public class Car {
         return pass;
     }
 
+    public String getDate() {
+        return date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
     public void setBrand(String brand) {
         this.brand = brand;
     }
@@ -33,5 +45,13 @@ public class Car {
 
     public void setPass(String pass) {
         this.pass = pass;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }
