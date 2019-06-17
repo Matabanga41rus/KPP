@@ -2,52 +2,112 @@ package main.cars_table;
 
 import main.Car;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
-import java.util.Scanner;
+
 
 public class VehicleInformation {
     private final String fileName = "cars.txt";
+    private final String numFile = "num_cars.txt";
+    private File file = new File(numFile);
 
-    private FileWriter writer;
-    private FileReader reader;
 
-    private ArrayList<Car> listExistingRecords = new ArrayList<>();
+    public void writeObj(ArrayList<Car> listCars){
+        try {
+            FileOutputStream fos = new FileOutputStream(new File(fileName));
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
 
-    public VehicleInformation(){
+            for(Car car: listCars)
+                oos.writeObject(car);
 
+            write(listCars.size());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void selectInfo(){
+    public ArrayList readObj(){
         try {
-            reader = new FileReader(fileName);
-            Scanner scanner = new Scanner(reader);
+            FileInputStream fis = new FileInputStream(new File(fileName));
+            ObjectInputStream ois = new ObjectInputStream(fis);
 
-            while(scanner.hasNextLine()){
-                String[] s = scanner.nextLine().split("\\s");
-                listExistingRecords.add(new Car(s[0], s[1], s[2], s[3], s[4]));
-            }
+            ArrayList<Car> list = new ArrayList<>();
+            for(int i = 0 ; i < read(); i++)
+                list.add((Car) ois.readObject());
 
-            reader.close();
+            return list;
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
-
-    public void updateFile(Car car){
-        try {
-            writer = new FileWriter(fileName);
-
-            String strCarInfo = car.getBrand() + " " + car.getNumber() + " " + car.getPass() + " " + car.getDate() + " " + car.getTime();
-
-        } catch (IOException e) {
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+
+        return null;
     }
+
+    private void write(int text) {
+        //Определяем файл
+        File file = new File(numFile);
+
+        try {
+            //проверяем, что если файл не существует то создаем его
+            if(!file.exists()){
+                file.createNewFile();
+            }
+
+            //PrintWriter обеспечит возможности записи в файл
+            PrintWriter out = new PrintWriter(file.getAbsoluteFile());
+
+            try {
+                //Записываем текст у файл
+                out.print(text);
+            } finally {
+                //После чего мы должны закрыть файл
+                //Иначе файл не запишется
+                out.close();
+            }
+        } catch(IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private int read() throws FileNotFoundException {
+        //Этот спец. объект для построения строки
+        StringBuilder sb = new StringBuilder();
+
+        exists(numFile);
+
+        try {
+            //Объект для чтения файла в буфер
+            BufferedReader in = new BufferedReader(new FileReader( file.getAbsoluteFile()));
+            try {
+                //В цикле построчно считываем файл
+                String s;
+                while ((s = in.readLine()) != null) {
+                    sb.append(s);
+                    sb.append("\n");
+                }
+            } finally {
+                //Также не забываем закрыть файл
+                in.close();
+            }
+        } catch(IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        //Возвращаем полученный текст с файла
+        return Integer.parseInt(sb.substring(0,1));
+    }
+
+    private void exists(String fileName) throws FileNotFoundException {
+        File file = new File(fileName);
+        if (!file.exists()){
+            throw new FileNotFoundException(file.getName());
+        }
+    }
+
 }
