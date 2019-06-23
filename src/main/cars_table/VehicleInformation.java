@@ -1,5 +1,7 @@
 package main.cars_table;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import main.Car;
 
 import java.io.*;
@@ -12,7 +14,7 @@ public class VehicleInformation {
     private File file = new File(numFile);
 
 
-    public void writeObj(ArrayList<Car> listCars){
+    public void writeObj(ObservableList<Car> listCars){
         try {
             FileOutputStream fos = new FileOutputStream(new File(fileName));
             ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -27,12 +29,12 @@ public class VehicleInformation {
         }
     }
 
-    public ArrayList readObj(){
+    public ObservableList readObj(){
         try {
             FileInputStream fis = new FileInputStream(new File(fileName));
             ObjectInputStream ois = new ObjectInputStream(fis);
 
-            ArrayList<Car> list = new ArrayList<>();
+            ObservableList list = FXCollections.observableArrayList();
             for(int i = 0 ; i < read(); i++)
                 list.add((Car) ois.readObject());
 

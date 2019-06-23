@@ -17,10 +17,8 @@ import java.util.Scanner;
 public class CarsTableController {
 
     private ObservableList<Car> listCars;
-    
-    private String fileDataCars = "cars.txt";
 
-    private ArrayList<Car> listExistingRecords = new ArrayList<>();
+    private VehicleInformation vi = new VehicleInformation();
 
     @FXML
     private TableView<Car> tableCars;
@@ -62,13 +60,17 @@ public class CarsTableController {
         updateCell(date);
         updateCell(time);
 
-        listCars = getListData();
+        listCars = FXCollections.observableArrayList(vi.readObj());
 
         tableCars.setItems(listCars);
 
-        addRecord.setOnAction(event -> {
-            Date d = new Date();
+        //searchNewRecord();
 
+        Alert warn = new Alert(Alert.AlertType.WARNING);
+        warn.setContentText("Внимание! Если не измененить значения новой записи во всех колонках, то она не будет сохранена");
+        warn.showAndWait();
+
+        addRecord.setOnAction(event -> {
             listCars.add(new Car("null", "null", "null", "00.00.0000", "00:00"));
         });
 
@@ -88,23 +90,22 @@ public class CarsTableController {
         });
     }
 
-    // ВНИМАНИЕ!!! ГОВНОКОД!!!
-    private void addNewFilledRecordsInFile(){
-        try {
-            FileWriter fw = new FileWriter(fileDataCars);
-
-        for(Car car: listCars){
-            if( !car.getBrand().equals("null")& !car.getNumber().equals("null")& !car.getPass().equals("null")& !car.getDate().equals("00.00.0000")& !car.getBrand().equals("00:00")){
-                    String str = car.getBrand() + " " + car.getNumber() + " " + car.getPass() + " " +car.getDate() + " " +car.getTime() + "\n";
-                    
-                    fw.write(str);
+    private void searchNewRecord(){
+        for(Car car1 : listCars){
+            for(Object object: vi.readObj()){
+                if(car1.equals(object)){
+                    System.out.println("record: true");
+                } else
+                    System.out.println("false");
             }
         }
+    }
 
-        fw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private boolean checkRecord(Car car){
+               if(!car.getBrand().equals("null") & !car.getNumber().equals("null") & !car.getPass().equals("null") & !car.getDate().equals("0000.00.00")){
+                   return true;
+               }
+               return false;
     }
 
     private void initCellTableColAsTextField (TableColumn<Car, String> tableColumn ,String nameFieldUser){
@@ -149,34 +150,5 @@ public class CarsTableController {
                 }break;
             }
         });
-    }
-
-    // ВНИМАНИЕ!!! ГОВНОКОД!!!
-    private ObservableList<Car> getListData() {
-        try {
-            FileReader fr = new FileReader(fileDataCars);
-            Scanner scanner = new Scanner(fr);
-
-            while(scanner.hasNextLine()){
-                String[] s = scanner.nextLine().split("\\s");
-                listExistingRecords.add(new Car(s[0], s[1], s[2], s[3], s[4]));
-            }
-            fr.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-        Car user1 = new Car("toyota hice", "d546ad", "ghj4534hgv", "12.06.19", "12:36");
-        Car user2 = new Car("mitsubushi lancer", "b453xa", "4g43k5gf34fg","12.06.19", "14:10");
-        Car user3 = new Car("lexus lx570", "n967sg", "g527fdh47sdg7","13.06.19", "15:08");
-
-        listExistingRecords.add(user1);
-        listExistingRecords.add(user2);
-        listExistingRecords.add(user3);
-
-        return FXCollections.observableArrayList(listExistingRecords);
     }
 }

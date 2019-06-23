@@ -17,6 +17,15 @@ public class Car implements Serializable {
         this.time = time;
     }
 
+    /*
+    public boolean compare(Car car){
+        if(brand.equals(car.getBrand()) & number.equals(car.getNumber()) & pass.equals(car.getPass()) & date.equals(car.getDate()) & time.equals(car.getTime()))
+            return true;
+        else
+            return false;
+    }
+    */
+
     public String getBrand() {
         return brand;
     }
